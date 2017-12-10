@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.sparkeasy.org/web/config" xmlns:se="http://www.sparkeasy.org/web/config"
+	elementFormDefault="qualified">
+
+	<xs:element name="sparkeasy-config" type="se:sparkeasy-config" />
+	<xs:element name="forward" type="se:forward" nillable="true" />
+	
+	<xs:complexType name="sparkeasy-config">
+		<xs:sequence>
+			<xs:element name="global-forwards" type="se:global-forwards"/>
+			<xs:element name="command-mappings" type="se:command-mappings"
+				minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="global-forwards">
+		<xs:sequence>
+			<xs:element ref="se:forward" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="command-mappings">
+		<xs:sequence>
+			<xs:element name="command-mapping" type="se:command-mapping"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="command-mapping">
+		<xs:sequence>
+			<xs:element ref="se:forward" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="action" type="xs:string" use="required" />
+		<xs:attribute name="command-class" type="xs:string" use="required" />
+	</xs:complexType>
+	<xs:complexType name="forward">
+		<xs:attribute name="outcome" type="xs:string" use="required" />
+		<xs:attribute name="view" type="xs:string" use="required" />
+	</xs:complexType>
+</xs:schema>
